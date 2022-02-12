@@ -50,15 +50,15 @@ class Model extends Component {
     constructor() {
         super();
         // Add event listeners
-        this.on("Status", async (params) => {
+        this.on("Show", async (params) => {
             let config = createConfig("POST", params);
-            fetch("http://127.0.0.1:3080/status", config)
+            fetch("http://127.0.0.1/api/accounts/show", config)
                 .then((response) => response.json())
                 .then((data) => {
-                    this.emit("Status done", data);
+                    this.emit("Show done", data);
                 })
                 .catch((err) => {
-                    this.emit("Status error", err);
+                    this.emit("Show error", err);
                 })
         });
     }
@@ -70,13 +70,13 @@ class ViewModel extends Component {
     constructor() {
         super();
         // Add event listeners
-        this.on("Status done", (data) => {
-            this.setState("Status result", data);
+        this.on("Show done", (data) => {
+            this.setState("Show result", data);
         });
     }
     // Create API calls	
-    Status(data) {
-        this.emit("Status", data);
+    Show(data) {
+        this.emit("Show", data);
     }
 }
 
@@ -87,10 +87,10 @@ class View extends Component {
         super();
         this.viewModel = viewModel;
         // Add event listeners
-        this.on("Status done", (data) => {
+        this.on("Show done", (data) => {
             this.render();
         });
-        this.on("Status error", (err) => {
+        this.on("Show error", (err) => {
             this.render();
         });
         // Initial rendering
@@ -99,24 +99,38 @@ class View extends Component {
     // render ...
     render() {
         // Read the current state
-        let obj = this.viewModel.getState("Status result");
+        let show = this.viewModel.getState("Show result");
         // Set the default
-        if (typeof obj === "undefined") {
-            obj = { text: "" }; // default here
+        if (typeof show === "undefined") {
+            show = []; // default here
         }
         // Set contents
-        document.querySelector("#status").innerHTML = obj.text;
+        let showHtml = document.querySelector("#online");
+        showHtml.innerHTML = "";
+        show.forEach(toonName => {
+            let p = document.createElement("p");
+            p.innerText = toonName; 
+            showHtml.appendChild(p);
+        });
+        document.querySelector("#online").innerHTML = show;
         // Add DOM event listeners
         let self = this;
         document.querySelector("#create").addEventListener("click", (evt) => {
             evt.preventDefault();
-            self.viewModel.Status();
             document.querySelector("#user").value = "";
             document.querySelector("#pass").value = "";
             document.querySelector("#pass2").value = "";
         });
+        // Add interval for who list
+        if (!reloadInterval) {
+            reloadInterval = setInterval(() => {
+                self.viewModel.Show();
+            }, 10000)
+        }
     }
 }
+
+let reloadInterval;
 
 const model = new Model();
 const viewModel = new ViewModel(); // model is loosely coupled via events
