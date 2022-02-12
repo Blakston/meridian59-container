@@ -61,6 +61,17 @@ class Model extends Component {
                     this.emit("Show error", err);
                 })
         });
+        this.on("Create", async (params) => {
+            let config = createConfig("POST", params);
+            fetch("http://127.0.0.1/api/accounts/create", config)
+                .then((response) => response.json())
+                .then((data) => {
+                    this.emit("Create done", data);
+                })
+                .catch((err) => {
+                    this.emit("Create error", err);
+                })
+        });
     }
 }
 
@@ -70,11 +81,17 @@ class ViewModel extends Component {
     constructor() {
         super();
         // Add event listeners
+        this.on("Create done", (data) => {
+            this.setState("Create result", data);
+        });
         this.on("Show done", (data) => {
             this.setState("Show result", data);
-        });
+        }); 
     }
     // Create API calls	
+    Create(data) {
+        this.emit("Create", data);
+    }
     Show(data) {
         this.emit("Show", data);
     }
@@ -87,6 +104,12 @@ class View extends Component {
         super();
         this.viewModel = viewModel;
         // Add event listeners
+        this.on("Create done", (data) => {
+            this.render();
+        });
+        this.on("Create error", (err) => {
+            this.render();
+        });
         this.on("Show done", (data) => {
             this.render();
         });
@@ -99,8 +122,12 @@ class View extends Component {
     // render ...
     render() {
         // Read the current state
+        let create = this.viewModel.getState("Create result");
         let show = this.viewModel.getState("Show result");
         // Set the default
+        if (typeof create === "undefined") {
+            create = ""; // default here
+        }
         if (typeof show === "undefined") {
             show = []; // default here
         }
@@ -117,9 +144,16 @@ class View extends Component {
         let self = this;
         document.querySelector("#create").addEventListener("click", (evt) => {
             evt.preventDefault();
+            self.viewModel.Create({
+                "user": document.querySelector("#user").value,
+                "pass": document.querySelector("#pass").value,
+                "pass2": document.querySelector("#pass2").value,
+                "email": document.querySelector("#email").value
+            });
             document.querySelector("#user").value = "";
             document.querySelector("#pass").value = "";
             document.querySelector("#pass2").value = "";
+            document.querySelector("#email").value = "";
         });
         // Add interval for who list
         if (!reloadInterval) {
