@@ -16,7 +16,7 @@ body {
   font-family: "Fira Sans Book", serif;
   font-size: 20pt;
   grid-template-areas: "header nav" "aside main";
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 400px 1fr;
   grid-template-rows: 3rem 1fr;
   height: 100%;
   width: 100%;
@@ -29,6 +29,29 @@ body {
     grid-area: aside;
     line-height: 1.75rem;
     padding: 1rem;
+
+    #account {
+      @include set-color($color-13);
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: .5rem;
+      margin: 1rem;
+      padding: 1rem;
+
+      button {
+        margin-top: 1rem;
+      }
+
+      button, input {
+        padding: .25rem;
+      }
+    }
+
+    #account_status {
+      margin: 1rem;
+      padding: 1rem;
+    }
 
     a {
       color: white !important;
@@ -50,36 +73,20 @@ body {
 
   main {
     @include set-color($color-11);
-    display: flex;
+    display: grid;
     flex-flow: column;
     font-size: 80%;
     grid-area: main;
+    grid-template-columns: 300px 1fr;
     line-height: 1.75rem;
     padding: 1rem;
-    
-    #form {
-      @include set-color($color-13);
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 1fr;
-      row-gap: .5rem;
-      margin: auto;
+
+    #logfile, #online {
+      border: 1px solid $color-13;
+      font-size: 70%;
+      height: calc(100% - 4rem);
+      margin: 1rem;
       padding: 1rem;
-      width: 400px;
-
-      button {
-        margin-top: 1rem;
-      }
-
-      button, input {
-        padding: .25rem;
-      }
-    }
-
-    #status {
-      margin: auto;
-      padding: 1rem;
-      width: 400px;
     }
   }
 

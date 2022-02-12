@@ -25,7 +25,6 @@ func (a *Handler) Connect(addr string) {
 	if a.err != nil {
 		return
 	}
-	// connect to the maintenance port
 	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
 		a.err = err
