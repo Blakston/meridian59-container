@@ -15,6 +15,7 @@ func main() {
 	http.Handle("/download/", http.StripPrefix("/download/", httpgzip.NewHandler(http.FileServer(http.Dir("download")), nil)))
 	// setup api
 	http.HandleFunc("/api/accounts/show", accounts.Show())
+	http.HandleFunc("/api/accounts/create", accounts.Create())
 	// setup the web frontend
 	http.Handle("/", httpgzip.NewHandler(http.FileServer(http.Dir("publisher/static")), nil))
 	// start listening
