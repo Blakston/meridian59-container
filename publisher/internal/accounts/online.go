@@ -8,8 +8,8 @@ import (
 	"github.com/andygeiss/meridian59-build/pkg/maintenance"
 )
 
-// Show ...
-func Show() http.HandlerFunc {
+// Online ...
+func Online() http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		// init connection to maintenance port
 		m := maintenance.NewHandler()

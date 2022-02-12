@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/andygeiss/meridian59-build/publisher/internal/accounts"
+	"github.com/andygeiss/meridian59-build/publisher/internal/god"
 	"github.com/xi2/httpgzip"
 )
 
@@ -14,8 +15,9 @@ func main() {
 	// setup download page
 	http.Handle("/download/", http.StripPrefix("/download/", httpgzip.NewHandler(http.FileServer(http.Dir("download")), nil)))
 	// setup api
-	http.HandleFunc("/api/accounts/show", accounts.Show())
 	http.HandleFunc("/api/accounts/create", accounts.Create())
+	http.HandleFunc("/api/accounts/online", accounts.Online())
+	http.HandleFunc("/api/god/log", god.Log())
 	// setup the web frontend
 	http.Handle("/", httpgzip.NewHandler(http.FileServer(http.Dir("publisher/static")), nil))
 	// start listening

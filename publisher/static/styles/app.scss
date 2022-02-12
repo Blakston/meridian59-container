@@ -14,7 +14,7 @@ body {
 .app {
   display: grid;
   font-family: "Fira Sans Book", serif;
-  font-size: 20pt;
+  font-size: 18pt;
   grid-template-areas: "header nav" "aside main";
   grid-template-columns: 400px 1fr;
   grid-template-rows: 3rem 1fr;
@@ -25,9 +25,9 @@ body {
     @include set-color($color-12);
     display: flex;
     flex-flow: column;
-    font-size: 80%;
+    font-size: 70%;
     grid-area: aside;
-    line-height: 1.75rem;
+    line-height: 1.5rem;
     padding: 1rem;
 
     #account {
@@ -49,6 +49,7 @@ body {
     }
 
     #account_status {
+      height: 64px;
       margin: 1rem;
       padding: 1rem;
     }
@@ -75,7 +76,7 @@ body {
     @include set-color($color-11);
     display: grid;
     flex-flow: column;
-    font-size: 80%;
+    font-size: 70%;
     grid-area: main;
     grid-template-columns: 300px 1fr;
     line-height: 1.75rem;
@@ -84,8 +85,9 @@ body {
     #logfile, #online {
       border: 1px solid $color-13;
       font-size: 70%;
-      height: calc(100% - 4rem);
+      height: 520px;
       margin: 1rem;
+      overflow-y: scroll;
       padding: 1rem;
     }
   }
