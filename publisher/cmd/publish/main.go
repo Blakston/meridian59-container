@@ -12,6 +12,8 @@ func main() {
 	http.Handle("/client/", http.StripPrefix("/client/", httpgzip.NewHandler(http.FileServer(http.Dir("client")), nil)))
 	// setup download page
 	http.Handle("/download/", http.StripPrefix("/download/", httpgzip.NewHandler(http.FileServer(http.Dir("download")), nil)))
+	// setup the web frontend
+	http.Handle("/", httpgzip.NewHandler(http.FileServer(http.Dir("publisher/static")), nil))
 	// start listening
 	if err := http.ListenAndServe(":80", nil); err != nil {
 		log.Fatal(err)

@@ -38,5 +38,6 @@ New-Item -Force -ItemType "directory" -Path "download"
 Copy-Item -Destination "download/" -Force -Path "client/configuration.xml"
 Copy-Item -Destination "download/" -Force -Path "client/patchurl.txt"
 Copy-Item -Destination "download/" -Force -Path "client/Meridian59.Patcher.exe"
+Compress-Archive -DestinationPath "download/patcher.zip" -Path "download"
 
 Write-Output "done."

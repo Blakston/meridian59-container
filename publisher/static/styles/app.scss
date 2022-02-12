@@ -1,0 +1,107 @@
+@import "colors.scss";
+@import "fonts.scss";
+@import "reset.scss";
+@import "mixins.scss";
+
+/* defaults */
+body {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* app specific */
+.app {
+  display: grid;
+  font-family: "Fira Sans Book", serif;
+  font-size: 20pt;
+  grid-template-areas: "header nav" "aside main";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 3rem 1fr;
+  height: 100%;
+  width: 100%;
+
+  aside {
+    @include set-color($color-12);
+    display: flex;
+    flex-flow: column;
+    font-size: 80%;
+    grid-area: aside;
+    line-height: 1.75rem;
+    padding: 1rem;
+
+    a {
+      color: white !important;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  header {
+    @include set-color($color-13);
+    align-items: center;
+    cursor: default;
+    display: flex;
+    font-size: 100%;
+    font-weight: bold;
+    grid-area: header;
+    padding: 1rem;
+  }
+
+  main {
+    @include set-color($color-11);
+    display: flex;
+    flex-flow: column;
+    font-size: 80%;
+    grid-area: main;
+    line-height: 1.75rem;
+    padding: 1rem;
+    
+    #form {
+      @include set-color($color-13);
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: .5rem;
+      margin: auto;
+      padding: 1rem;
+      width: 400px;
+
+      button {
+        margin-top: 1rem;
+      }
+
+      button, input {
+        padding: .25rem;
+      }
+    }
+
+    #status {
+      margin: auto;
+      padding: 1rem;
+      width: 400px;
+    }
+  }
+
+  nav {
+    @include set-color($color-13);
+    display: flex;
+    font-size: 80%;
+    grid-area: nav;
+    justify-content: flex-end;
+    line-height: 1rem;
+    padding: 1rem;
+
+    a {
+      align-items: center;
+      display: flex;
+      margin: 0 .5rem;
+      padding: 0 .5rem;
+
+      img {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+}
