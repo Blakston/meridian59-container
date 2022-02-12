@@ -1,0 +1,13 @@
+#
+# Control file for last successful save
+#
+# Files written:
+# savegame\gameuser.1644596229
+# savegame\accounts.1644596229
+# savegame\striings.1644596229
+# savegame\dynarscs.1644596229
+#
+# Last successful save was at Feb 11 2022 17:17:09
+#
+
+LASTSAVE 1644596229

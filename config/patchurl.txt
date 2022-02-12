@@ -1,2 +1,2 @@
-https://update.meridian59.de/NETClient/clientpatch
-https://update.meridian59.de/NETClient/patchinfo.txt
+http://localhost/client
+http://localhost/client/patchinfo.txt

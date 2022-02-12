@@ -1,0 +1,4 @@
+github.com/klauspost/compress v1.14.2 h1:S0OHlFk/Gbon/yauFJ4FfJJF5V0fc5HbBTJazi28pRw=
+github.com/klauspost/compress v1.14.2/go.mod h1:/3/Vjq9QcHkK5uEr5lBEmyoZ1iFhe47etQ6QUkpK6sk=
+github.com/xi2/httpgzip v0.0.0-20190509075255-932ab5e254ae h1:8qQDqpy4i5eqSsgPu0F4sK+XUA4rLg87lISt9QsgJ+A=
+github.com/xi2/httpgzip v0.0.0-20190509075255-932ab5e254ae/go.mod h1:79MWNkfNT6haX1tL/I2CxfAR76mUWukU+Anzr2S7B2E=
