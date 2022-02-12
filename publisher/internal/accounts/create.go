@@ -42,7 +42,9 @@ func Create() http.HandlerFunc {
 			parts := strings.Split(lines[1], " ")
 			numPoint := strings.Split(parts[2], ".")
 			m.Send(fmt.Sprintf("create user %s", numPoint[0]))
+			m.Receive()
 			m.Send(fmt.Sprintf("create user %s", numPoint[0]))
+			m.Receive()
 		}
 		// send response
 		json.NewEncoder(rw).Encode(response)
