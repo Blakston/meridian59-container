@@ -19,7 +19,7 @@ func Online() http.HandlerFunc {
 		m.Send("who")
 		out := m.Receive()
 		// extract toon names from the who list
-		var toons []string
+		toons := []string{}
 		lines := strings.Split(out, "\n")
 		for _, line := range lines {
 			line = strings.ReplaceAll(line, "\u0000", "")

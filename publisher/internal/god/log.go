@@ -27,7 +27,10 @@ func Log() http.HandlerFunc {
 func filter(lines []string) (filtered []string) {
 	for _, line := range lines {
 		// filter who commands
-		if strings.Contains(line, "Session: M Command: who") {
+		if strings.Contains(line, "Session: M Command:") {
+			continue
+		}
+		if strings.Contains(line, "create user") {
 			continue
 		}
 		filtered = append(filtered, line)
