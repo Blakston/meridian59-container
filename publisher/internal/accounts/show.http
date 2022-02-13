@@ -1,4 +1,0 @@
-POST http://127.0.0.1/api/accounts/online HTTP/1.1
-content-type: application/json
-
-{}

@@ -2,3 +2,4 @@ bin
 client
 download
 server
+scripts/test.ps1
