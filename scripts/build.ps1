@@ -38,10 +38,10 @@ New-Item -Force -ItemType "directory" -Path "download"
 Copy-Item -Destination "download/" -Force -Path "client/configuration.xml"
 Copy-Item -Destination "download/" -Force -Path "client/patchurl.txt"
 Copy-Item -Destination "download/" -Force -Path "client/Meridian59.Patcher.exe"
-Compress-Archive -DestinationPath "patcher.zip" -Path "download"
+Compress-Archive -DestinationPath "download/patcher.zip" -Force -Path "download"
 
 # create server package for deployment
 Write-Output "creating server package ..."
-Compress-Archive -DestinationPath "server.zip" -Path client,server,bin
+Compress-Archive -DestinationPath "server.zip" -Force -Path bin,client,download,server
 
 Write-Output "done."
