@@ -1,4 +1,4 @@
-FROM m59base:latest
+FROM scratch
 
 RUN mkdir -p /opt/meridian59
 
@@ -12,4 +12,4 @@ WORKDIR /opt/meridian59
 ENV M59_HOST=m59server
 ENV M59_PORT=59595
 
-CMD [ "wine", "bin/publish.exe" ]
+CMD [ "wine", "bin/publish.bin" ]
