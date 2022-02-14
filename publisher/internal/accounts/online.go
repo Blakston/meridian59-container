@@ -2,7 +2,9 @@ package accounts
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/andygeiss/meridian59-build/pkg/maintenance"
@@ -10,10 +12,12 @@ import (
 
 // Online ...
 func Online() http.HandlerFunc {
+	host := os.Getenv("M59_HOST")
+	port := os.Getenv("M59_PORT")
 	return func(rw http.ResponseWriter, r *http.Request) {
 		// init connection to maintenance port
 		m := maintenance.NewHandler()
-		m.Connect("127.0.0.1:59595")
+		m.Connect(fmt.Sprintf("%s:%s", host, port))
 		defer m.Close()
 		// get players online
 		m.Send("who")

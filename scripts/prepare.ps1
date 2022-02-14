@@ -40,8 +40,4 @@ Copy-Item -Destination "download/" -Force -Path "client/patchurl.txt"
 Copy-Item -Destination "download/" -Force -Path "client/Meridian59.Patcher.exe"
 Compress-Archive -DestinationPath "download/patcher.zip" -Force -Path "download"
 
-# create server package for deployment
-Write-Output "creating server package ..."
-Compress-Archive -DestinationPath "server.zip" -Force -Path bin,client,download,publisher/static,server
-
 Write-Output "done."

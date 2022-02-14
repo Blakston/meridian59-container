@@ -19,7 +19,7 @@ func main() {
 	http.HandleFunc("/api/accounts/online", accounts.Online())
 	http.HandleFunc("/api/god/log", god.Log())
 	// setup the web frontend
-	http.Handle("/", httpgzip.NewHandler(http.FileServer(http.Dir("publisher/static")), nil))
+	http.Handle("/", httpgzip.NewHandler(http.FileServer(http.Dir("static")), nil))
 	// start listening
 	if err := http.ListenAndServe(":80", nil); err != nil {
 		log.Fatal(err)
