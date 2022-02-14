@@ -42,6 +42,6 @@ Compress-Archive -DestinationPath "download/patcher.zip" -Force -Path "download"
 
 # create server package for deployment
 Write-Output "creating server package ..."
-Compress-Archive -DestinationPath "server.zip" -Force -Path bin,client,download,server
+Compress-Archive -DestinationPath "server.zip" -Force -Path bin,client,download,publisher/static,server
 
 Write-Output "done."

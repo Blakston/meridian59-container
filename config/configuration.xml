@@ -2,7 +2,7 @@
 <configuration>
   <resources version="10016" path="../resources/" preloadrooms="false" preloadobjects="false" preloadroomtextures="false" preloadsound="false" preloadmusic="false" />
   <connections selectedindex="0">
-    <connection name="local" host="localhost" port="5959" stringdictionary="rsc0000.rsb" username="" password="" character="">
+    <connection name="test" host="5.45.106.192" port="5959" stringdictionary="rsc0000.rsb" username="" password="" character="">
       <ignorelist />
       <groups />
     </connection>
