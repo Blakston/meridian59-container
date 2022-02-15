@@ -18,7 +18,7 @@ Build your own Meridian59 server by using a container based deployment.
 
 - Compile the patcher and the publisher: 
     
-    scripts/compile.ps1
+        scripts/compile.ps1
 
 - Prepare the server and client for the deployment: 
 
