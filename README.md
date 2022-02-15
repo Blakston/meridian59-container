@@ -22,32 +22,32 @@ Build your own Meridian59 server by using a container based deployment.
 
 - Prepare the server and client for the deployment: 
 
-    scripts/prepare.ps1
+        scripts/prepare.ps1
 
 - Pack the required files as an archive named `server.zip`: 
 
-    scripts/pack.ps1
+        scripts/pack.ps1
 
 - Deploy the archive to your server: 
 
-    scripts/deploy.ps1
+        scripts/deploy.ps1
 
 - Login into your server.
 - Unzip the archive from your home directory into a target location like `/opt/meridian59`:
 
-    mkdir -p /opt/meridian59
-    unzip server.zip -d /opt/meridian59/
+        mkdir -p /opt/meridian59
+        unzip server.zip -d /opt/meridian59/
 
 - Install Docker and Portainer (optional) and build the docker images:
 
-    ./docker/install-docker.sh
-    ./docker/install-portainer.sh
+        ./docker/install-docker.sh
+        ./docker/install-portainer.sh
 
-    ./docker/build-images.sh
+        ./docker/build-images.sh
 
 ## Run as docker
 
-    ./docker/run-container.sh
+        ./docker/run-container.sh
 
 ## Finally check the web server and portainer
 
