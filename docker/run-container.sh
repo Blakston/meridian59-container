@@ -12,7 +12,7 @@ docker run \
 	--name m59client \
 	--net m59 \
 	--restart=always \
-	--volume $PWD/server/channel:/server/channel \
+	--volume $PWD/server/channel:/server/channel:ro \
 	-p 80:80 \
 	m59client
 
@@ -24,6 +24,8 @@ docker run \
 	--name m59server \
 	--net m59 \
 	--restart=always \
+	--volume $PWD/server/channel:/server/channel:rw \
+	--volume $PWD/server/savegame:/server/savegame:rw \
 	-p 5959:5959 \
 	m59server
 
