@@ -1,6 +1,4 @@
-
-$M59_HOST = "5.45.106.192"
-$M59_PORT = "59595"
+. ("config.ps1")
 
 # update server
 Write-Output "updating the server ..."
