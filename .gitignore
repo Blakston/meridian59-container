@@ -4,3 +4,6 @@ download
 server
 server.zip
 scripts/test.ps1
+static/scripts/*.min.js
+static/styles/*.css
+static/styles/*.map
