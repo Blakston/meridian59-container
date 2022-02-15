@@ -3,6 +3,7 @@ package accounts
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -17,7 +18,8 @@ func Create() http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		// init connection to maintenance port
 		m := maintenance.NewHandler()
-		m.Connect(fmt.Sprintf("%s:%s", host, port))
+		addr := fmt.Sprintf("%s:%s", host, port)
+		m.Connect(addr)
 		defer m.Close()
 		// define request and response
 		var request struct {
@@ -35,22 +37,27 @@ func Create() http.HandlerFunc {
 		cmd := fmt.Sprintf("create account user %s %s %s", request.User, request.Pass, request.EMail)
 		m.Send(cmd)
 		out := m.Receive()
+		if err := m.Error(); err != nil {
+			log.Printf("error: %v", err)
+		}
 		lines := strings.Split(out, "\n")
-		// handle errors
-		if strings.Contains(lines[1], "already exists") {
-			lines[1] = strings.ReplaceAll(lines[1], "\u0000", "")
-			response.Error = lines[1]
+		if len(lines) > 0 {
+			// handle errors
+			if strings.Contains(lines[1], "already exists") {
+				lines[1] = strings.ReplaceAll(lines[1], "\u0000", "")
+				response.Error = lines[1]
+			}
+			// handle success
+			if strings.Contains(out, "Created") {
+				parts := strings.Split(lines[1], " ")
+				numPoint := strings.Split(parts[2], ".")
+				m.Send(fmt.Sprintf("create user %s", numPoint[0]))
+				m.Receive()
+				m.Send(fmt.Sprintf("create user %s", numPoint[0]))
+				m.Receive()
+			}
+			// send response
 		}
-		// handle success
-		if strings.Contains(out, "Created") {
-			parts := strings.Split(lines[1], " ")
-			numPoint := strings.Split(parts[2], ".")
-			m.Send(fmt.Sprintf("create user %s", numPoint[0]))
-			m.Receive()
-			m.Send(fmt.Sprintf("create user %s", numPoint[0]))
-			m.Receive()
-		}
-		// send response
 		json.NewEncoder(rw).Encode(response)
 	}
 }

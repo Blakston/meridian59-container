@@ -3,6 +3,7 @@ package accounts
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -17,11 +18,15 @@ func Online() http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		// init connection to maintenance port
 		m := maintenance.NewHandler()
-		m.Connect(fmt.Sprintf("%s:%s", host, port))
+		addr := fmt.Sprintf("%s:%s", host, port)
+		m.Connect(addr)
 		defer m.Close()
 		// get players online
 		m.Send("who")
 		out := m.Receive()
+		if err := m.Error(); err != nil {
+			log.Printf("error: %v", err)
+		}
 		// extract toon names from the who list
 		toons := []string{}
 		lines := strings.Split(out, "\n")

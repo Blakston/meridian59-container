@@ -28,15 +28,6 @@ Copy-Item -Destination "client/" -Force -Path "config/configuration.xml"
 Write-Output "syncing client and server ..."
 Copy-Item -Destination "client/resources/strings/" -Force -Path "server/rsc/rsc0000.rsb"
 
-# compile patcher and publisher
-Write-Output "compiling patcher and publisher ..."
-$env:GOOS = 'windows'
-go build -ldflags "-s -w"-o bin/patch.exe patcher/cmd/patch/main.go
-go build -ldflags "-s -w"-o bin/publish.exe publisher/cmd/publish/main.go
-$env:GOOS = 'linux'
-go build -ldflags "-s -w" -o bin/patch.bin patcher/cmd/patch/main.go
-go build -ldflags "-s -w"-o bin/publish.bin publisher/cmd/publish/main.go
-
 # create patchinfo.txt
 Write-Output "creating patch info ..."
 bin/patch.exe client

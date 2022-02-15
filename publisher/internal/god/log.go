@@ -3,6 +3,7 @@ package god
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -12,13 +13,13 @@ func Log() http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		// define request and response
 		var lines []string
-
-		content, _ := ioutil.ReadFile("server/channel/god.txt")
-
+		content, err := ioutil.ReadFile("server/channel/god.txt")
+		if err != nil {
+			log.Printf("error: %v", err)
+		}
 		lines = strings.Split(string(content), "\n")
 		reverse(lines)
 		lines = filter(lines)
-
 		// send response
 		json.NewEncoder(rw).Encode(lines)
 	}

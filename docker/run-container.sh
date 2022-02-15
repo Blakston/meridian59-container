@@ -16,8 +16,11 @@ docker run \
 	-p 80:80 \
 	m59client
 
+maintenance=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' m59client)
+
 docker run \
 	-d \
+	-e M59_MASK=$maintenance \
 	--name m59server \
 	--net m59 \
 	--restart=always \
